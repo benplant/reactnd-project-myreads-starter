@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import BookshelfChanger from './BookshelfChanger'
 
 class Book extends Component {
+  static propTypes = {
+      book: PropTypes.object.isRequired,
+      onChangeShelf: PropTypes.func.isRequired
+    }
+
   render () {
     console.log('Props', this.props)
     return (
