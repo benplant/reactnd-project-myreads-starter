@@ -8,6 +8,10 @@ class Book extends Component {
     onChangeShelf: PropTypes.func.isRequired
   }
 
+  updateShelf(newShelf) {
+    this.props.onChangeShelf(this.props.book, newShelf)
+  }
+
   render () {
     const { book } = this.props
 
@@ -17,8 +21,7 @@ class Book extends Component {
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
           <BookshelfChanger
             currentShelf={book.shelf}
-            book={book}
-            onChangeShelf={this.props.onChangeShelf}
+            onChangeShelf={this.updateShelf.bind(this)}
           />
         </div>
         <div className="book-title">{book.title}</div>

@@ -10,24 +10,27 @@ class BookshelfChanger extends Component {
     super(props);
 
     if (this.props.currentShelf) {
-      this.state = {bookShelf: this.props.currentShelf};
+      this.state = {shelf: this.props.currentShelf};
     } else {
-      this.state = {bookShelf: 'none'};
+      this.state = {shelf: 'none'};
     }
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
+    console.log('Book in BookshelfChanger: ');
+    console.log(this.props.book);
+
     const newShelf = event.target.value
-    this.setState({bookShelf: newShelf});
-    this.props.onChangeShelf(this.props.book, newShelf);
+    this.setState({shelf: newShelf});
+    this.props.onChangeShelf(newShelf);
   }
 
   render () {
     return (
       <div className="book-shelf-changer">
-        <select value={this.state.bookShelf} onChange={this.handleChange}>
+        <select value={this.state.shelf} onChange={this.handleChange}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
