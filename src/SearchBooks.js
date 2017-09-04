@@ -6,6 +6,7 @@ import Book from './Book';
 
 class SearchBooks extends Component {
   static propTypes = {
+    currentBooks: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired
   }
 
@@ -23,6 +24,15 @@ class SearchBooks extends Component {
     BooksAPI.search(this.state.query, 20).then((books) => {
       this.setState({ books })
     })
+  }
+
+  checkForShelf = (book) => {
+    const matchingBook = this.props.currentBooks.filter(b => b.id === book.id)
+    if (matchingBook[0]) {
+      return matchingBook[0].shelf;
+    } else {
+      return 'none';
+    }
   }
 
   render () {
@@ -55,6 +65,7 @@ class SearchBooks extends Component {
             { books &&
               books.map((book) => (
               <li key={book.id}>
+                { book.shelf = this.checkForShelf(book) }
                 <Book
                   book={book}
                   onChangeShelf={this.props.onChangeShelf}
