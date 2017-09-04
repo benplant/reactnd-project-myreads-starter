@@ -6,6 +6,21 @@ import SearchBooks from './SearchBooks';
 import Bookshelf from './Bookshelf';
 import './App.css';
 
+const bookshelves = [
+  {
+    title: "Currently Reading",
+    shelf: "currentlyReading"
+  },
+  {
+    title: "Want to Read",
+    shelf: "wantToRead"
+  },
+  {
+    title: "Read",
+    shelf: "read"
+  }
+];
+
 class BooksApp extends React.Component {
   state = {
     books: []
@@ -62,21 +77,14 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Bookshelf
-                  title="Currently Reading"
-                  books={books.filter(b => b.shelf === "currentlyReading")}
-                  onChangeShelf={this.updateBook.bind(this)}
-                />
-                <Bookshelf
-                  title="Want to Read"
-                  books={books.filter(b => b.shelf === "wantToRead")}
-                  onChangeShelf={this.updateBook.bind(this)}
-                />
-                <Bookshelf
-                  title="Read"
-                  books={books.filter(b => b.shelf === "read")}
-                  onChangeShelf={this.updateBook.bind(this)}
-                />
+                {bookshelves.map((bookshelf, index) => (
+                  <Bookshelf
+                    key={index}
+                    title={bookshelf.title}
+                    books={books.filter(b => b.shelf === `${bookshelf.shelf}`)}
+                    onChangeShelf={this.updateBook.bind(this)}
+                  />
+                ))}
               </div>
             </div>
             <div className="open-search">
