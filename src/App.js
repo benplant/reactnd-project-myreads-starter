@@ -25,8 +25,8 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, newShelf);
     book.shelf = newShelf;
 
-    // Add book to current state if not already present
-    if (this.state.books.indexOf(book) < 0) {
+    const matchingBook = this.state.books.filter(b => b.id === book.id)
+    if  (!matchingBook[0]) {
       this.setState(state => ({
           books: state.books.concat([ book ])
       }))

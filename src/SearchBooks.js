@@ -29,9 +29,9 @@ class SearchBooks extends Component {
   checkForShelf = (book) => {
     const matchingBook = this.props.currentBooks.filter(b => b.id === book.id)
     if (matchingBook[0]) {
-      return matchingBook[0].shelf;
+      book.shelf = matchingBook[0].shelf;
     } else {
-      return 'none';
+      book.shelf = 'none';
     }
   }
 
@@ -65,7 +65,7 @@ class SearchBooks extends Component {
             { books &&
               books.map((book) => (
               <li key={book.id}>
-                { book.shelf = this.checkForShelf(book) }
+                { this.checkForShelf(book) }
                 <Book
                   book={book}
                   onChangeShelf={this.props.onChangeShelf}
