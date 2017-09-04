@@ -3,25 +3,31 @@ import PropTypes from 'prop-types';
 
 class BookshelfChanger extends Component {
   static propTypes = {
-    currentShelf: PropTypes.string.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
-    this.state = {value: this.props.currentShelf};
+
+    if (this.props.currentShelf) {
+      this.state = {bookShelf: this.props.currentShelf};
+    } else {
+      this.state = {bookShelf: 'none'};
+    }
 
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    alert('You want to move the book to: ' + this.state.value);
-    this.setState({value: event.target.value});
+    const newShelf = event.target.value
+    this.setState({bookShelf: newShelf});
+    this.props.onChangeShelf(this.props.book, newShelf);
   }
 
   render () {
     return (
       <div className="book-shelf-changer">
-        <select value={this.state.value} onChange={this.handleChange}>
+        <select value={this.state.bookShelf} onChange={this.handleChange}>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>

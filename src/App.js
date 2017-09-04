@@ -12,10 +12,19 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
+    this.updateBooks();
+  }
+
+  updateBooks() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
-      console.log(books)
     })
+  }
+
+  updateBook(book, newShelf) {
+    BooksAPI.update(book, newShelf);
+    book.shelf = newShelf;
+    this.setState(this.state)
   }
 
   render() {
@@ -35,9 +44,21 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Bookshelf title="Currently Reading" books={books.filter(b => b.shelf === "currentlyReading")} />
-                <Bookshelf title="Want to Read" books={books.filter(b => b.shelf === "wantToRead")} />
-                <Bookshelf title="Read" books={books.filter(b => b.shelf === "read")} />
+                <Bookshelf
+                  title="Currently Reading"
+                  books={books.filter(b => b.shelf === "currentlyReading")}
+                  onChangeShelf={this.updateBook.bind(this)}
+                />
+                <Bookshelf
+                  title="Want to Read"
+                  books={books.filter(b => b.shelf === "wantToRead")}
+                  onChangeShelf={this.updateBook.bind(this)}
+                />
+                <Bookshelf
+                  title="Read"
+                  books={books.filter(b => b.shelf === "read")}
+                  onChangeShelf={this.updateBook.bind(this)}
+                />
               </div>
             </div>
             <div className="open-search">
