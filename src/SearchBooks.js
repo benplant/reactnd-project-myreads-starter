@@ -17,7 +17,6 @@ class SearchBooks extends Component {
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
     this.updateBooks()
-    console.log(this.state.books)
   }
 
   updateBooks = () => {
