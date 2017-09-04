@@ -37,22 +37,16 @@ class BooksApp extends React.Component {
   }
 
   updateBook(book, newShelf) {
-    console.log('Book: ');
-    console.log(book);
-    console.log('newShelf: ');
-    console.log(newShelf);
     BooksAPI.update(book, newShelf);
-    book.shelf = newShelf;
-
-    console.log('Book after update: ');
-    console.log(book)
 
     const matchingBook = this.state.books.filter(b => b.id === book.id)
     if  (!matchingBook[0]) {
+      book.shelf = newShelf;
       this.setState(state => ({
           books: state.books.concat([ book ])
       }))
     } else {
+      matchingBook[0].shelf = newShelf;
       this.setState(this.state)
     }
   }

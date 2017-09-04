@@ -19,9 +19,6 @@ class BookshelfChanger extends Component {
   }
 
   handleChange(event) {
-    console.log('Book in BookshelfChanger: ');
-    console.log(this.props.book);
-
     const newShelf = event.target.value
     this.setState({shelf: newShelf});
     this.props.onChangeShelf(newShelf);
