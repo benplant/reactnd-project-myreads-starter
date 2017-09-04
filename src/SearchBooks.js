@@ -16,14 +16,14 @@ class SearchBooks extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-    this.updateBooks()
+    this.setState({ query: query.trim() });
+    this.updateBooks();
   }
 
   updateBooks = () => {
     BooksAPI.search(this.state.query, 20).then((books) => {
-      this.setState({ books })
-    })
+      this.setState({ books });
+    });
   }
 
   checkForShelf = (book) => {

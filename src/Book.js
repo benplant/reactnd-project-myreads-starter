@@ -9,11 +9,11 @@ class Book extends Component {
   }
 
   updateShelf(newShelf) {
-    this.props.onChangeShelf(this.props.book, newShelf)
+    this.props.onChangeShelf(this.props.book, newShelf);
   }
 
   render () {
-    const { book } = this.props
+    const { book } = this.props;
 
     return (
       <div className="book">

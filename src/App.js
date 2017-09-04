@@ -33,13 +33,13 @@ class BooksApp extends React.Component {
   updateBooks() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
-    })
+    });
   }
 
   updateBook(book, newShelf) {
     BooksAPI.update(book, newShelf);
 
-    const matchingBook = this.state.books.filter(b => b.id === book.id)
+    const matchingBook = this.state.books.filter(b => b.id === book.id);
     if  (!matchingBook[0]) {
       book.shelf = newShelf;
       this.setState(state => ({
@@ -47,12 +47,12 @@ class BooksApp extends React.Component {
       }))
     } else {
       matchingBook[0].shelf = newShelf;
-      this.setState(this.state)
+      this.setState(this.state);
     }
   }
 
   render() {
-    const { books } = this.state
+    const { books } = this.state;
 
     return (
       <div className="app">
