@@ -22,9 +22,20 @@ class BooksApp extends React.Component {
   }
 
   updateBook(book, newShelf) {
+    console.log('UpdateBook');
+    console.log(book);
+    console.log(newShelf);
     BooksAPI.update(book, newShelf);
     book.shelf = newShelf;
-    this.setState(this.state)
+
+    // Add book to current state if not already present
+    if (this.state.books.indexOf(book) < 0) {
+      this.setState(state => ({
+          books: state.books.concat([ book ])
+      }))
+    } else {
+      this.setState(this.state)
+    }
   }
 
   render() {
@@ -34,7 +45,9 @@ class BooksApp extends React.Component {
       <div className="app">
 
       <Route path="/search" render={() => (
-        <SearchBooks />
+        <SearchBooks
+          onChangeShelf={this.updateBook.bind(this)}
+        />
       )}/>
 
       <Route exact path="/" render={() => (
